@@ -5,15 +5,16 @@
 ### Might work on rails4, untried
 rails -v
 
-PROJ=$1
 GEMFILE_BAK=./Gemfile
-
-if [ ! $PROJ ] ; then
-  echo 'Provide project name as argument.'
-  exit 1
+PROJ=${PROJ:-blab}
+if [ ! $1 ] ; then
+  read -p "Enter name for rails project. Default is \"$PROJ\" " PROVIDE
+  if [ -n $PROVIDE ] ; then
+    PROJ = $PROVIDE
+  fi
 fi
 if [ -d "$PROJ" ] ; then
-  echo 'Directory exists and will be overwritten. Ctrl+C to exit.'
+  read -p 'Directory exists and will be overwritten. Ctrl+C to exit. '
   rm -rfI $PROJ
 fi
  

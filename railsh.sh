@@ -6,7 +6,8 @@
 rails -v
 
 PROJ=$1
-GEMFILE_BAK=~/GemfileBAK.txt
+GEMFILE_BAK=./Gemfile
+
 if [ ! $PROJ ] ; then
   echo 'Provide project name as argument.'
   exit 1
@@ -21,8 +22,8 @@ echo "
 *** Make project directories and init project :
 "
 mkdir $PROJ
+cp $GEMFILE_BAK $PROJ/Gemfile
 cd $PROJ
-cp $GEMFILE_BAK ./Gemfile
 bundle install
 rails new . --skip-gemfile
 git init .
@@ -110,7 +111,11 @@ echo "gem 'simplecov'" >> Gemfile
 bundle install --quiet
 rails g rspec:install
  
- 
+pwd
+ls spec
+mkdir -p spec/models
+#touch spec/models/tag_spec.rb
+
 echo "
 require 'spec_helper'
  

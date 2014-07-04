@@ -1,6 +1,8 @@
 railsh
 ======
 
+USAGE: `./railsh.sh myproject`
+
 Bash script that makes a rails 3 project with:
 
 - two models related through a join table
@@ -12,4 +14,5 @@ Bash script that makes a rails 3 project with:
 
 Change the hardcoded GEMFILE_BAK to point to a nice rails 3 Gemfile.
 For a couple commands you may have to sudo interactively.
-Use chmod +x railsh.sh to allow execution like: source ./railsh.sh
+Use chmod a+x railsh.sh to allow execution.
+

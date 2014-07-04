@@ -9,10 +9,9 @@ GEMFILE_BAK=./Gemfile
 PROJ=${PROJ:-blab}
 if [ ! $1 ] ; then
   read -p "Enter name for rails project. Default is \"$PROJ\" " PROVIDE
-  if [ -n $PROVIDE ] ; then
-    PROJ = $PROVIDE
-  fi
 fi
+PROJ=${PROVIDE:-PROJ}
+
 if [ -d "$PROJ" ] ; then
   read -p 'Directory exists and will be overwritten. Ctrl+C to exit. '
   rm -rfI $PROJ
@@ -20,7 +19,7 @@ fi
  
  
 echo "
-*** Make project directories and init project :
+*** Make project directories and init project : $PROJ
 "
 mkdir $PROJ
 cp $GEMFILE_BAK $PROJ/Gemfile
@@ -108,7 +107,8 @@ echo "
 #git checkout master
 git checkout -b add-model-spec
 echo "gem 'rspec-rails'" >> Gemfile
-echo "gem 'simplecov'" >> Gemfile
+# 2014/07/04 simplecov reporting a bug unless this version spec
+echo "gem 'simplecov', '~> 0.7.1'" >> Gemfile
 bundle install --quiet
 rails g rspec:install
  

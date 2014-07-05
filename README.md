@@ -1,7 +1,7 @@
 railsh
 ======
 
-USAGE: `./railsh.sh myproject`
+USAGE: `./railsh.sh`
 
 Bash script that makes a rails 3 project with:
 

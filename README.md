@@ -1,8 +1,6 @@
 railsh
 ======
 
-USAGE: `./railsh.sh`
-
 Bash script that makes a rails 3 project with:
 
 - two models related through a join table
@@ -10,4 +8,5 @@ Bash script that makes a rails 3 project with:
 - standalone migration for a compound index
 - necessary manual changes to the models and specs
 - git branching
-- rspec with simplecov.
+- rspec with simplecov
+- `./railsh.sh`

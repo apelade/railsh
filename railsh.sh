@@ -6,14 +6,13 @@
 rails -v
 
 GEMFILE_BAK=./Gemfile
-PROJ=${PROJ:-blab}
+PROJ=${1:-blab}
 if [ ! $1 ] ; then
   read -p "Enter name for rails project. Default is \"$PROJ\" " PROVIDE
 fi
-PROJ=${PROVIDE:-PROJ}
-
+PROJ=${PROVIDE:-"$PROJ"}
 if [ -d "$PROJ" ] ; then
-  read -p 'Directory exists and will be overwritten. Ctrl+C to exit. '
+  read -p 'Directory $PROJ exists and will be overwritten. Ctrl+C to exit. '
   rm -rfI $PROJ
 fi
  
@@ -22,11 +21,17 @@ echo "
 *** Make project directories and init project : $PROJ
 "
 mkdir $PROJ
+if [ ! -d "$PROJ" ] ; then
+  echo "Failed to mkdir $PROJ. Exiting."
+  exit 1
+fi
 cp $GEMFILE_BAK $PROJ/Gemfile
 cd $PROJ
 bundle install
 rails new . --skip-gemfile
 git init .
+git config user.email "you@example.com"
+git config user.name "Your Name"
 git add .
 git commit -am "initial commit of new project" --quiet
 git checkout -b add-models
@@ -108,7 +113,7 @@ echo "
 git checkout -b add-model-spec
 echo "gem 'rspec-rails'" >> Gemfile
 # 2014/07/04 simplecov reporting a bug unless this version spec
-echo "gem 'simplecov', '~> 0.7.1'" >> Gemfile
+echo "gem 'simplecov', '~> 0.6.1'" >> Gemfile
 bundle install --quiet
 rails g rspec:install
  

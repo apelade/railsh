@@ -44,7 +44,8 @@ rails g scaffold Tag name:string
 rails g scaffold Product name:string model:string price:decimal text:text
 rails g scaffold ProductTag product:references tag:references #model?
 bundle exec rake db:migrate
-bundle exec rake db:test:prepare
+# No longer needed in rails4
+# bundle exec rake db:test:prepare
  
  
 echo "
@@ -52,14 +53,15 @@ echo "
 "
 echo "
 class Product < ActiveRecord::Base
-  attr_accessible :model, :name, :price, :text
+#  attr_accessible :model, :name, :price, :text
+
   has_many :product_tags
   has_many :tags, :through => :product_tags
 end
 " > app/models/product.rb
 echo "
 class Tag < ActiveRecord::Base
-  attr_accessible :name
+#  attr_accessible :name
   has_many :product_tags
   has_many :products, :through => :product_tags
 end
@@ -95,7 +97,7 @@ end
 " > db/migrate/*_add_index_to_product_tag.rb
 cat db/migrate/*_add_index_to_product_tag.rb
 bundle exec rake db:migrate
-bundle exec rake db:test:prepare
+#bundle exec rake db:test:prepare
  
 git add .
 git commit -am "added compound unique index on table product_tags" --quiet
@@ -111,9 +113,9 @@ echo "
 "
 #git checkout master
 git checkout -b add-model-spec
-echo "gem 'rspec-rails'" >> Gemfile
+echo "gem 'rspec-rails', :group => :test" >> Gemfile
 # 2014/07/04 simplecov reporting a bug unless this version spec
-echo "gem 'simplecov', '~> 0.6.1'" >> Gemfile
+echo "gem 'simplecov', '~> 0.7.1', :require => false, :group => :test" >> Gemfile
 bundle install --quiet
 rails g rspec:install
  
@@ -123,7 +125,8 @@ mkdir -p spec/models
 #touch spec/models/tag_spec.rb
 
 echo "
-require 'spec_helper'
+require 'rails_helper'
+#require 'spec_helper'
  
 describe Tag do
   it '#create raises no errors' do
@@ -138,8 +141,9 @@ end
  
  
 echo "
-require 'spec_helper'
- 
+require 'rails_helper'
+#require 'spec_helper'
+
 describe Product do
   it '#create raises no errors' do
     expect { product = Product.create({name: 'firewood'}) }.not_to raise_error
@@ -153,8 +157,9 @@ end
  
  
 echo "
-require 'spec_helper'
- 
+require 'rails_helper'
+#require 'spec_helper'
+
 describe ProductTag do
   it 'Product #tags.create' do
     prod = Product.create({name: 'Umbrella'})

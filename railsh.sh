@@ -1,8 +1,7 @@
 #! /bin/bash
 ## Rails 4 script for project with models and many-to-many
-## Note: suppressing output of git commit
- 
-### Might work on rails4, untried
+## Note: simplecov is acting weird. Suppressing output of git commit.
+
 rails -v
 
 GEMFILE_BAK=./Gemfile
@@ -111,7 +110,6 @@ git merge add-index-prod-tag
 echo "
 *** Manually enter model tests, and run with simplecov gem for coverage metric :
 "
-#git checkout master
 git checkout -b add-model-spec
 echo "gem 'rspec-rails', :group => :test" >> Gemfile
 # 2014/07/04 simplecov reporting a bug unless this version spec
@@ -122,7 +120,6 @@ rails g rspec:install
 pwd
 ls spec
 mkdir -p spec/models
-#touch spec/models/tag_spec.rb
 
 echo "
 # replaces spec_helper in recent versions

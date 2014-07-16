@@ -96,8 +96,9 @@ end
 " > db/migrate/*_add_index_to_product_tag.rb
 cat db/migrate/*_add_index_to_product_tag.rb
 bundle exec rake db:migrate
-#bundle exec rake db:test:prepare
- 
+# No longer needed in rails4
+# bundle exec rake db:test:prepare
+
 git add .
 git commit -am "added compound unique index on table product_tags" --quiet
 git checkout master

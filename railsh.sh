@@ -1,5 +1,5 @@
 #! /bin/bash
-## Rails 3 script for project with models and many-to-many
+## Rails 4 script for project with models and many-to-many
 ## Note: suppressing output of git commit
  
 ### Might work on rails4, untried
@@ -125,8 +125,8 @@ mkdir -p spec/models
 #touch spec/models/tag_spec.rb
 
 echo "
+# replaces spec_helper in recent versions
 require 'rails_helper'
-#require 'spec_helper'
  
 describe Tag do
   it '#create raises no errors' do
@@ -141,8 +141,8 @@ end
  
  
 echo "
+# replaces spec_helper in recent versions
 require 'rails_helper'
-#require 'spec_helper'
 
 describe Product do
   it '#create raises no errors' do
@@ -157,8 +157,8 @@ end
  
  
 echo "
+# replaces spec_helper in recent versions
 require 'rails_helper'
-#require 'spec_helper'
 
 describe ProductTag do
   it 'Product #tags.create' do
